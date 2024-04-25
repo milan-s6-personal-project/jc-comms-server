@@ -1,17 +1,20 @@
-# FROM node:18.16.0-alpine3.17
-# RUN mkdir -p /opt/app
-# WORKDIR /opt/app
-# COPY package.json src/package-lock.json .
-# RUN npm install
-# COPY . .
-# EXPOSE 3001
-# CMD [ "node", "src/index.js"]
+# Fetching the minified node image on apline linux
+FROM node:slim
 
-FROM node:18.16.0-alpine3.17
-RUN mkdir -p /opt/app
-WORKDIR /opt/app
-COPY src/package.json src/package-lock.json .
+# Declaring env
+ENV NODE_ENV development
+
+# Setting up the work directory
+WORKDIR /express-docker
+
+# Copying all the files in our project
+COPY . .
+
+# Installing dependencies
 RUN npm install
-COPY src/ .
-EXPOSE 3001
-CMD [ "node", "index.js"]
+
+# Starting our application
+CMD [ "node", "index.js" ]
+
+# Exposing server port
+EXPOSE 5000

@@ -2,14 +2,13 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const cors = require('cors');
-const { Server } = require("socket.io");
+// const { Server } = require("socket.io");
 const server = http.createServer(app);
 require('dotenv').config()
-const io = new Server(server, {
+const io = require("socket.io")(server, {
     cors: {
-        origin: process.env.ORIGIN_WEBAPP,
-        methods: ["GET", "POST"]
-    },
+        origin: '*',
+    }
 });
 
 app.use(cors());
@@ -21,6 +20,7 @@ const rooms = new Map(); // Map<Room, Set<SocketId>>
 const socketUsers = new Map();
 
 const roomIsFull = (roomid) => {
+    const usersInRooms = [];
     rooms.forEach((users, room) => {
         if (room !== roomid) return;
         usersInRooms.push(...Array.from(users));
@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
         // Associate userId with socket.id
         socketUsers.set(socket.id, userId);
 
-        if (!socket.rooms.has(room) && roomIsFull(room)) { // Check if socket is not already in the room
+        if (!socket.rooms.has(room)) { // Check if socket is not already in the room
             // Add socket to the room
             socket.join(room);
 
