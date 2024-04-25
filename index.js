@@ -21,6 +21,7 @@ const rooms = new Map(); // Map<Room, Set<SocketId>>
 const socketUsers = new Map();
 
 const roomIsFull = (roomid) => {
+    const usersInRooms = [];
     rooms.forEach((users, room) => {
         if (room !== roomid) return;
         usersInRooms.push(...Array.from(users));

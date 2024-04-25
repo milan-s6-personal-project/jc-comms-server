@@ -15,6 +15,7 @@ spec:
       containers:
         - name: jc-comms-server
           image: milanspiridonov/jc-comms-server:testing-latest # Use the Docker image we built earlier
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
