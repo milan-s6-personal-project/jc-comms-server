@@ -13,5 +13,5 @@ WORKDIR /opt/app
 COPY src/package.json src/package-lock.json .
 COPY src/ .
 RUN npm install
-EXPOSE 3001
+EXPOSE 5000
 CMD [ "node", "index.js"]
