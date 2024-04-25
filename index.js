@@ -7,7 +7,7 @@ const server = http.createServer(app);
 require('dotenv').config()
 const io = require("socket.io")(server, {
     cors: {
-        origin: "*",
+        origin: "https://0aac-145-93-92-236.ngrok-free.app/meeting/test",
         // origin: process.env.ORIGIN_WEBAPP,
         methods: ["GET", "POST"]
     },
