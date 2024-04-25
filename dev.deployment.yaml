@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jc-comms-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jc-comms-server
+  template:
+    metadata:
+      labels:
+        app: jc-comms-server
+    spec:
+      containers:
+        - name: jc-comms-server
+          image: milanspiridonov/jc-comms-server:testing-latest # Use the Docker image we built earlier
+          ports:
+            - containerPort: 5000
+          env:
+            - name: ORIGIN_WEBAPP
+              value: jc-frontend.s-a-rb04-grp3.svc.cluster.local
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jc-comms-server
+spec:
+  selector:
+    app: jc-comms-server
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer
+  
