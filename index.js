@@ -7,7 +7,8 @@ const server = http.createServer(app);
 require('dotenv').config()
 const io = new Server(server, {
     cors: {
-        origin: process.env.ORIGIN_WEBAPP,
+        origin: "*",
+        // origin: process.env.ORIGIN_WEBAPP,
         methods: ["GET", "POST"]
     },
 });
