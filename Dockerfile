@@ -10,8 +10,9 @@
 FROM node:18.16.0-alpine3.17
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
-COPY package.json package-lock.json .
-COPY src/ .
+COPY ./package.json .
+COPY ./package-lock.json .
+COPY ./src/ .
 RUN npm install
 EXPOSE 5000
 CMD [ "node", "index.js"]
