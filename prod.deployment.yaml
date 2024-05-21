@@ -18,9 +18,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
-          env:
-            - name: ORIGIN_WEBAPP
-              value: jc-frontend.s-a-rb04-grp3.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service
@@ -33,5 +30,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 5000
-  type: LoadBalancer
+  type: ClusterIP
   
