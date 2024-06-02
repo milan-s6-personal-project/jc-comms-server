@@ -33,6 +33,7 @@ app.get('/room/:roomid', (req, res) => {
     const roomid = req.params.roomid;
     const usersInRooms = [];
 
+    // fetch(process.env.ORIGIN_GATEWAY, { method: "GET", })
 
     rooms.forEach((users, room) => {
         if (room !== roomid) return;
